@@ -36,11 +36,11 @@ window.onload = function () {
 		
 		round = 1
 		roundtarget = 1
-		roundtarget = parseInt(window.prompt("How many rounds you wanna play?\nMax:6",1))
+		roundtarget = parseInt(window.prompt("How many rounds you wanna play?\nMax:23",1))
 		if(isNaN(roundtarget)){
 			roundtarget=1
 		}else{
-			roundtarget = Math.min(Math.max(roundtarget,1),6)
+			roundtarget = Math.min(Math.max(roundtarget,1),23)
 		}
 		DOM["start-game"].parentNode.hidden=true
 		DOM["menu-ingame"].hidden=false
@@ -61,7 +61,7 @@ window.onload = function () {
 			scoreP1++
 		}else if(P1select==1 & P2select==0){
 			scoreP1++
-		}else if(P1select==2 & P2select==1)
+		}else if(P1select==2 & P2select==1){
 			scoreP1++
 		}else{
 			scoreP2++
