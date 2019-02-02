@@ -1,102 +1,100 @@
 'use strict';
+
+var data = new Object();
+data.scoreP1 = 0
+data.scoreP2 = 0
+data.P1select
+data.P2select
+
+data.round = 1
+data.roundtarget = 1
+	
+data.items = ["rock.svg","paper.svg","scissors.svg"]
+data.DOM
+data.buttons
+
 window.onload = function () {
-
-	var scoreP1 = 0
-	var scoreP2 = 0
-	var P1select
-	var P2select
-
-	var round = 1
-	var roundtarget = 1
+	data.DOM = getElements()
+	data.buttons = document.getElementsByClassName("player-move")
 	
-	var items = ["rock.svg","paper.svg","scissors.svg"]
-	
-	var DOM = getElements()
-
-	DOM["start-game"].addEventListener('click', function() {
+	data.DOM["start-game"].addEventListener('click', function() {
 		game_init()
 	})
 
-	DOM["rock"].addEventListener('click', function() {
-		play(0)
-	})
-	DOM["paper"].addEventListener('click', function() {
-		play(1)
-	})
-	DOM["scissors"].addEventListener('click', function() {
-		play(2)
-	})
-	
+	for(var key of data.buttons){
+		key.addEventListener('click', play);
+	}
 	
 	function game_init(){
-		scoreP1 = 0
-		scoreP2 = 0
-		P1select = 1
-		P2select = 1
+		data.scoreP1 = 0
+		data.scoreP2 = 0
+		data.P1select = 1
+		data.P2select = 1
 		
-		round = 1
-		roundtarget = 1
-		roundtarget = parseInt(window.prompt("How many rounds you wanna play?\nMax:23",1))
-		if(isNaN(roundtarget)){
-			roundtarget=1
+		data.round = 1
+		data.roundtarget = 1
+		data.roundtarget = parseInt(window.prompt("How many rounds you wanna play?\nMax:23",1))
+		if(isNaN(data.roundtarget)){
+			data.roundtarget=1
 		}else{
-			roundtarget = Math.min(Math.max(roundtarget,1),23)
+			data.roundtarget = Math.min(Math.max(data.roundtarget,1),23)
 		}
-		DOM["start-game"].parentNode.hidden=true
-		DOM["menu-ingame"].hidden=false
+		data.DOM["start-game"].parentNode.hidden=true
+		data.DOM["menu-ingame"].hidden=false
 		
 		update_stats()
 		
 	}
 	
 	
-	function play(a){
-		round++
-		P1select = a
-		P2select = Math.floor(Math.random()*3)
+	function play(){
+		data.round++
+		console.log(this)
+		data.P1select = this.dataset["move"] == "rock" ? 0 : this.dataset["move"] == "paper" ? 1 : 2
+		data.P2select = Math.floor(Math.random()*3)
 		
-		if(P1select==P2select){
+		if(data.P1select==data.P2select){
 			
-		}else if(P1select==0 & P2select==2){
-			scoreP1++
-		}else if(P1select==1 & P2select==0){
-			scoreP1++
-		}else if(P1select==2 & P2select==1){
-			scoreP1++
+		}else if(data.P1select==0 & data.P2select==2){
+			data.scoreP1++
+		}else if(data.P1select==1 & data.P2select==0){
+			data.scoreP1++
+		}else if(data.P1select==2 & data.P2select==1){
+			data.scoreP1++
 		}else{
-			scoreP2++
+			data.scoreP2++
 		}
 		
 		update_stats()
 		
-		if(round>=roundtarget){
-			DOM["round"].innerHTML = roundtarget+"/"+roundtarget
-			if(scoreP1>scoreP2){
+		if(data.round>=data.roundtarget){
+			data.DOM["round"].innerHTML = data.roundtarget+"/"+data.roundtarget
+			if(data.scoreP1>data.scoreP2){
 				window.alert("nice you win")
-			}else if(scoreP1<scoreP2){
+			}else if(data.scoreP1<data.scoreP2){
 				window.alert("well... you lose")
 			}else{
 				window.alert("gg draw")
 			}
-			DOM["start-game"].parentNode.hidden=false
-			DOM["menu-ingame"].hidden=true
+			data.DOM["start-game"].parentNode.hidden=false
+			data.DOM["menu-ingame"].hidden=true
 			
 		}
 		
 	}
 	
 	function update_stats(){
-		DOM["score"].innerHTML = scoreP1+":"+scoreP2
-		DOM["round"].innerHTML = round+"/"+roundtarget
+		data.DOM["score"].innerHTML = data.scoreP1+":"+data.scoreP2
+		data.DOM["round"].innerHTML = data.round+"/"+data.roundtarget
 		
-		DOM["img1"].src = items[P1select]
-		DOM["img2"].src = items[P2select]
+		data.DOM["img1"].src = "images/"+data.items[data.P1select]
+		data.DOM["img2"].src = "images/"+data.items[data.P2select]
 	}
 	
 	function getElements(){
 		var newarr=[]
 		var key
-		for (key of ["start-game","menu-ingame","rock","paper","scissors","score","round","img1","img2"]){
+		for (key of ["start-game","menu-ingame","score","round","img1","img2"]){
 			newarr[key] = document.getElementById(key)
 		}
 		return newarr;
