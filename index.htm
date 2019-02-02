@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<title>rock paper scissors</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="js/script.js" type="text/javascript"></script>
@@ -11,7 +11,7 @@
 
 	<div id="menu">
 		<div id="menu-start">
-			<button id="start-game">New Game</button>
+			<button data-modal="#modal-one" class="show-modal">New Game</button>
 		</div>
 
 		<div id="menu-ingame" hidden>
@@ -29,5 +29,31 @@
 			<div id="round">-/-</div>
 		</div>
 	</div>
+	
+	<div class="overlay" id="modal-overlay">
+		<div class="modal" id="modal-one">
+			<header>New Game</header>
+			<div class="content">
+				<p>game settings</p>
+				<p>Your Name:</p>
+				<input id="nickinput" type="text" placeholder="Nick"></input>
+				<p>Rounds:</p>
+				<input id="roundinput" type="value" placeholder="1"></input>
+				<button id="start-game" class="close">Start Game</button>
+			</div>
+		</div>
+		<div class="modal" id="modal-two">
+			<header>Game Over</header>
+			<div class="content">
+				<p>meh</p>
+				<p>Your Score: </p>
+				<p>PC Score: </p>
+				<p>Total rounds:</p>
+			</div>
+		</div>
+	</div>
+	
+	<div id="trigger-modal-two" data-modal="#modal-two" class="show-modal" hidden></div>
+	
 </body>
 </html>
