@@ -57,11 +57,11 @@ window.onload = function () {
 		
 		if(P1select==P2select){
 			
-		}else if(P1select==1 & P2select==0){
-			scoreP1++
 		}else if(P1select==0 & P2select==2){
 			scoreP1++
-		}else if(P1select==2 & P2select==0){
+		}else if(P1select==1 & P2select==0){
+			scoreP1++
+		}else if(P1select==2 & P2select==1)
 			scoreP1++
 		}else{
 			scoreP2++
