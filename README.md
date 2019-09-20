@@ -1,2 +1,2 @@
-rock paper scissors
-https://klapek11970.github.io/htm-rock-paper-scissors/
+# rock paper scissors
+# https://patrykzah.github.io/htm-rock-paper-scissors/
